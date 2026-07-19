@@ -1,16 +1,22 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
+import { ReactElement } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
 type DropDownButtonProps = {
   content: string;
+  icon?: ReactElement;
+  onPress?: () => void;
 };
 
-export default function DropDownButton({ content }: DropDownButtonProps) {
+export default function DropDownButton({
+  content,
+  icon,
+  onPress,
+}: DropDownButtonProps) {
   return (
-    <Pressable style={styles.dropDownMenu}>
+    <Pressable style={styles.dropDownMenu} onPress={onPress}>
       <View style={{ flexDirection: "row", gap: 5 }}>
-        <AntDesign name="environment" size={24} color="green" />
+        {icon}
         <Text style={styles.contextText}>{content}</Text>
       </View>
       <Entypo name="chevron-thin-down" size={20} color="#B7B7B7" />

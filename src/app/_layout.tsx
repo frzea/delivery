@@ -1,23 +1,11 @@
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 
 export default function RootLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        headerTitleStyle: {
-          fontFamily: "Nunito",
-          fontWeight: "bold",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          headerTitle: "Розрахунок доставки",
-          //headerShown: false,
-        }}
-      />
-      <Tabs.Screen name="history" />
-    </Tabs>
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="city-picker" />
+      <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+    </Stack>
   );
 }
