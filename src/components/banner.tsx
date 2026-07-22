@@ -8,9 +8,27 @@ export default function Banner() {
         <Text style={styles.title}>1+1=3</Text>
         <Text style={styles.subtitle}>3-я доставка в подарок!</Text>
       </View>
-      <ImageBox width={130} height={82} top={9} left={265} />
-      <ImageBox width={170} height={105} top={30} left={275} />
-      <ImageBox width={102} height={60} top={10} left={320} />
+      <ImageBox
+        position="absolute"
+        width={130}
+        height={82}
+        top={9}
+        left={265}
+      />
+      <ImageBox
+        position="absolute"
+        width={170}
+        height={105}
+        top={30}
+        left={275}
+      />
+      <ImageBox
+        position="absolute"
+        width={102}
+        height={60}
+        top={10}
+        left={320}
+      />
     </View>
   );
 }

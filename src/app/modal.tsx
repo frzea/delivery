@@ -1,4 +1,5 @@
 import SegmentedControl from "@/components/SegmentedControl";
+import ParcelSizeList from "@/components/size-list";
 import { useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
@@ -8,7 +9,7 @@ type Props = {
 };
 
 export default function ModalChooseParcel({ visible, setModalVisible }: Props) {
-  const [sizeType, setSizeType] = useState<string>("Примерные");
+  const [sizeType, setSizeType] = useState<string>("Точні");
   return (
     <Modal
       visible={visible}
@@ -19,15 +20,18 @@ export default function ModalChooseParcel({ visible, setModalVisible }: Props) {
       <View style={styles.backdrop}>
         <Pressable
           style={StyleSheet.absoluteFill}
-          onPress={() => setModalVisible(false)}
+          onPress={() => {
+            setModalVisible(false);
+          }}
         ></Pressable>
         <View style={styles.sheet}>
           <Text style={styles.text}>Розмір посилки</Text>
           <SegmentedControl
-            options={["Примерные", "Точні"]}
+            options={["Точні", "Приблизні"]}
             value={sizeType}
             onChange={setSizeType}
           />
+          {sizeType === "Точні" && <ParcelSizeList />}
         </View>
       </View>
     </Modal>
@@ -46,6 +50,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
+    gap: 20,
   },
   text: {
     fontSize: 30,

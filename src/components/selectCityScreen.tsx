@@ -1,16 +1,8 @@
+import { CITIES } from "@/constants/cities";
 import { useDeliveryStore } from "@/store/Store";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-
-const CITIES = [
-  "Днепр",
-  "Киев",
-  "Харьков",
-  "Одесса",
-  "Кривой Рог",
-  "Каменское",
-];
 
 export default function SelectCityScreen() {
   const { setCity } = useDeliveryStore();

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     elevation: 2, // тень на Android
   },
   text: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: "500",
     color: "#8A8A8A",
   },
