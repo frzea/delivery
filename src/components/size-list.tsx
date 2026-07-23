@@ -1,12 +1,11 @@
 import { PARCEL_SIZES } from "@/constants/parcelSizes";
 import { useDeliveryStore } from "@/store/Store";
-import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import ImageBox from "./imageBox";
 
 export default function ParcelSizeList() {
-  const [size, setSize] = useState<number | null>(null);
-  const { setSelectedSize, selectedSize } = useDeliveryStore();
+  const selectedSize = useDeliveryStore((store) => store.selectedSize);
+  const setSelectedSize = useDeliveryStore((store) => store.setSelectedSize);
 
   type ParcelSize = (typeof PARCEL_SIZES)[number];
   type ItemProps = {
@@ -17,7 +16,6 @@ export default function ParcelSizeList() {
     <Pressable
       style={styles.itemStyle}
       onPress={() => {
-        setSize(item.id);
         setSelectedSize({
           id: item.id,
           name: item.name,

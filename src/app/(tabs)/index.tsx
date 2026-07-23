@@ -6,16 +6,27 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useShallow } from "zustand/react/shallow";
 
 export default function StartPage() {
-  const store = useDeliveryStore();
+  const { selectedSize, postCity, getCity } = useDeliveryStore(
+    useShallow((state) => ({
+      selectedSize: state.selectedSize,
+      postCity: state.postCity,
+      getCity: state.getCity,
+    })),
+  );
   const [modalVisible, setModalVisible] = useState(false);
+
+  const sizeLabel = selectedSize
+    ? `${selectedSize.name} (${selectedSize.width}×${selectedSize.height}×${selectedSize.length})`
+    : "Не вказаний";
 
   return (
     <View style={styles.page}>
       <Text style={styles.text}>Місто відправки</Text>
       <DropDownButton
-        content={store.postCity}
+        content={postCity}
         icon={<AntDesign name="environment" size={24} color="green" />}
         onPress={() =>
           router.push({
@@ -26,7 +37,7 @@ export default function StartPage() {
       />
       <Text style={styles.text}>Місто призначення</Text>
       <DropDownButton
-        content={store.getCity}
+        content={getCity}
         icon={<AntDesign name="environment" size={24} color="green" />}
         onPress={() =>
           router.push({
@@ -37,7 +48,7 @@ export default function StartPage() {
       />
       <Text style={styles.text}>Розмір посилки</Text>
       <DropDownButton
-        content={store.sizeParcel}
+        content={sizeLabel}
         onPress={() => setModalVisible(true)}
       />
       <Banner />

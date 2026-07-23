@@ -1,3 +1,4 @@
+import CastomParcelSize from "@/components/castom-size-modal";
 import SegmentedControl from "@/components/SegmentedControl";
 import ParcelSizeList from "@/components/size-list";
 import { useState } from "react";
@@ -31,7 +32,7 @@ export default function ModalChooseParcel({ visible, setModalVisible }: Props) {
             value={sizeType}
             onChange={setSizeType}
           />
-          {sizeType === "Точні" && <ParcelSizeList />}
+          {sizeType === "Точні" ? <ParcelSizeList /> : <CastomParcelSize />}
         </View>
       </View>
     </Modal>
