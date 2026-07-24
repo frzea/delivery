@@ -12,11 +12,10 @@ export default function ParcelSizeList() {
     item: ParcelSize;
   };
 
-  const Item = ({ item }: ItemProps) => (
-    <Pressable
-      style={styles.itemStyle}
-      onPress={() => {
-        setSelectedSize({
+  function handleChoose({ item }: ItemProps) {
+    selectedSize?.id === item.id
+      ? setSelectedSize(null)
+      : setSelectedSize({
           id: item.id,
           name: item.name,
           length: item.length,
@@ -24,8 +23,10 @@ export default function ParcelSizeList() {
           height: item.height,
           isCustom: false,
         });
-      }}
-    >
+  }
+
+  const Item = ({ item }: ItemProps) => (
+    <Pressable style={styles.itemStyle} onPress={() => handleChoose({ item })}>
       <View style={styles.content}>
         <ImageBox position="static" width={100} height={110} top={0} left={0} />
         <View style={styles.textWrapper}>

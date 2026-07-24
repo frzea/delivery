@@ -1,6 +1,7 @@
 import { useDeliveryStore } from "@/store/Store";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Button } from "react-native-paper";
 import { useShallow } from "zustand/react/shallow";
 
 export default function CastomParcelSize() {
@@ -11,21 +12,20 @@ export default function CastomParcelSize() {
     })),
   );
   const [length, setLength] = useState(
-    selectedSize?.length ? String(selectedSize.length) : "",
+    selectedSize?.isCustom ? String(selectedSize.length) : "",
   );
   const [width, setWidth] = useState(
-    selectedSize?.width ? String(selectedSize.width) : "",
+    selectedSize?.isCustom ? String(selectedSize.width) : "",
   );
   const [height, setHeight] = useState(
-    selectedSize?.height ? String(selectedSize.height) : "",
+    selectedSize?.isCustom ? String(selectedSize.height) : "",
   );
-
   const [errors, setErrors] = useState<{
     length?: string;
     width?: string;
     height?: string;
   }>({});
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState(selectedSize?.isCustom ? true : false);
 
   const validate = () => {
     const newErrors: typeof errors = {};
@@ -90,9 +90,17 @@ export default function CastomParcelSize() {
         />
         {errors.height && <Text style={styles.error}>{errors.height}</Text>}
       </View>
-      <Pressable style={styles.button} onPress={handleSave}>
-        {<Text style={styles.buttonText}>Застосувати</Text>}
-      </Pressable>
+      <Button
+        buttonColor="green"
+        icon={isSaved ? "check" : ""}
+        mode="contained"
+        onPress={handleSave}
+        style={styles.button}
+        labelStyle={styles.text}
+        disabled={isSaved}
+      >
+        {!isSaved ? "Застосувати" : "Збережено"}
+      </Button>
     </View>
   );
 }
@@ -115,32 +123,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: "Nunito",
   },
-  button: {
+  castbutton: {
     height: 50,
     padding: 10,
     borderRadius: 10,
     backgroundColor: "#2E7D32",
     marginBottom: 20,
   },
+  button: {
+    justifyContent: "center",
+    height: 50,
+    borderRadius: 10,
+    marginBottom: 20,
+  },
   buttonDone: {
     backgroundColor: "#5B9E60",
-  },
-  buttonContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 6,
   },
   buttonText: {
     flex: 1,
     textAlign: "center",
     justifyContent: "center",
     fontSize: 20,
-    fontFamily: "Nunito",
-    color: "#fff",
-    fontWeight: "600",
-  },
-  buttonTextDone: {
-    fontSize: 16,
     fontFamily: "Nunito",
     color: "#fff",
     fontWeight: "600",

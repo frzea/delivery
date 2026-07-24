@@ -15,7 +15,7 @@ type DeliveryStore = {
   setCity: (mode: "from" | "to", city: string) => void;
   sizeParcel: string;
   selectedSize: SelectedParcelSize | null;
-  setSelectedSize: (size: SelectedParcelSize) => void;
+  setSelectedSize: (size: SelectedParcelSize | null) => void;
   setExactDimensions: (length: number, width: number, height: number) => void;
 };
 
